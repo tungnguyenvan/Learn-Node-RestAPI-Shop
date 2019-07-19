@@ -1,5 +1,5 @@
 const express = require('express');
-const route = express.Router();
+const router = express.Router();
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
@@ -20,7 +20,7 @@ router.get('/:oderId', (req, res, next) => {
     });
 });
 
-route.delete('/:oderId', (req, res, next) => {
+router.delete('/:oderId', (req, res, next) => {
     res.status(200).json({
         message: 'delete oder',
         oderId: req.params.oderId
@@ -28,4 +28,4 @@ route.delete('/:oderId', (req, res, next) => {
 });
 
 
-module.exports = route;
+module.exports = router;
