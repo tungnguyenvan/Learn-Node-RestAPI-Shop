@@ -2,9 +2,15 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan'); 
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const productRoute  = require('./api/routes/Products');
 const odersRoute    = require('./api/routes/Oders');
+
+mongoose.connect(
+    'mongodb+srv://node-api-shop:'+
+     "node-api-shop" +
+     '@node-rest-api-uldpg.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true });
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
