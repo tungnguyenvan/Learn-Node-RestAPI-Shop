@@ -17,3 +17,9 @@
 |	|	show dbs; : show datbases												|
 |	|	use db;	  : use database												|
 |	|	show collections: show database co nhung collection nao 				|
+|	|	db.createCollection('test') : Tao collection test						|
+|	|	db.test.find(): show tat ca cac document co trong collection test		|
+|	|	db.test.insert({name: 'tung', age: 15}): Tao Document 					|
+|	|	db.test.update({DK}, {update}) : update 								|
+|	|	db.test.update({Dk}, {$set: {update}}) : update giu lai cac truong cu 	|
+|	|	db.test.remove({dk}): remove											|
