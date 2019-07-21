@@ -11,6 +11,7 @@ mongoose.connect(
     'mongodb+srv://node-api-shop:'+
      "node-api-shop" +
      '@node-rest-api-uldpg.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true });
+mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -4,9 +4,15 @@ const mongoose = require('mongoose');
 const Product = require('../models/Product');
 
 router.get('/', (req, res, next) => {
-    Product.find().exec()
+    Product.find()
+    .select('_id name price')
+    .exec()
     .then(result => {
-        res.status(200).json(result);
+        const response = {
+            count: result.length,
+            products: result
+        }
+        res.status(200).json(response);
     })
     .catch(err => {
         res.status(500).json({error: err});
