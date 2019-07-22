@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const user = require('../models/User');
 
@@ -38,6 +39,49 @@ router.post('/signup', function(req, res, next) {
                 }
             });
         }
+    });
+});
+
+router.post('./login', (req, res, next) => {
+    user.find({ email: req.body.email }).exec()
+    .then(result => {
+        if (result.length < 1) {
+            res.status(404).json({
+                message: 'email not found'
+            });
+        }
+
+        bcrypt.compare(req.body.password, result[0].password, (err, result) => {
+            if (err) {
+                res.status(401).json({
+                    message: 'auth failed'
+                });
+            }
+            if (result) {
+                const token = jwt.sign(
+                    {
+                        email: result[0].email,
+                        _id: result[0]._id
+                    }, 
+                    process.env.JWT_KEY,
+                    {
+                        expiresIn: "1h"
+                    })
+                return res.status(200).json({
+                    message: 'auth successful ',
+                    token: token
+                });
+            }
+
+            res.status(401).json({
+                message: 'auth failed'
+            });
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
     });
 });
 

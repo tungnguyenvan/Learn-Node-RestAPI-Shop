@@ -1,5 +1,6 @@
 {
     "evn" : {
-        "MONGO_ATLAS_PW": "node-api-shop"
+        "MONGO_ATLAS_PW": "node-api-shop",
+        "JWT_KEY": "secrect"
     }
 }
