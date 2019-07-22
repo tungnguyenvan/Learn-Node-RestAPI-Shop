@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const productRoute  = require('./api/routes/Products');
 const odersRoute    = require('./api/routes/Oders');
+const userRoute     = require('./api/routes/Users');
 
 mongoose.connect(
     'mongodb+srv://node-api-shop:'+
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 // for Route
 app.use('/products', productRoute);
 app.use('/oders', odersRoute);
+app.use('user', userRoute);
 
 app.use((req, res, next) => {
     const error = new Error('not found');
