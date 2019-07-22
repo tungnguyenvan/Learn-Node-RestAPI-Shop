@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const checkAuth = require('../middleware/CheckAuth');
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
@@ -7,7 +8,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
     const oder = {
         productId: req.body.productId,
         quantity: req.body.quantity
@@ -18,14 +19,14 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.get('/:oderId', (req, res, next) => {
+router.get('/:oderId', checkAuth, (req, res, next) => {
     res.status(200).json({
         message: 'Order detail',
         oderId: req.params.oderId
     });
 });
 
-router.delete('/:oderId', (req, res, next) => {
+router.delete('/:oderId', checkAuth, (req, res, next) => {
     res.status(200).json({
         message: 'delete oder',
         oderId: req.params.oderId
